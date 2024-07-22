@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Helpers\TimeHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -24,8 +25,7 @@ class Task extends Model
 
     public function getTotalTime()
     {
-        $carbon = Carbon::createFromTimestamp($this->seconds_spent ?: 0);
-        return $carbon->format('H:i:s');
+        return TimeHelper::secondsToFormatTime($this->seconds_spent ?: 0);
     }
 
     public function addSeconds(int $seconds = 0)

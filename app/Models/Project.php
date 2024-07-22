@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Helpers\TimeHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +27,8 @@ class Project extends Model
         $totalTime = $this->tasks->sum(function ($task) {
             return $task->seconds_spent;
         }) ?: 0;
-        return gmdate('H:i:s', $totalTime);
+
+        return TimeHelper::secondsToFormatTime($totalTime);
     }
 
 }

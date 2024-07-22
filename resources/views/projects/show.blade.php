@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>{{ $project->name }}</h1>
+        <h1>Проект <b>{{ $project->name }}</b></h1>
         <p>{{ $project->description }}</p>
 
         <p>Общее время проекта: {{$project->getTotalTime()}}</p>
