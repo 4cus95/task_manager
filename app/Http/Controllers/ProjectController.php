@@ -45,7 +45,7 @@ class ProjectController extends Controller
         $this->authorize('update', $project);
         $project->update($request->all());
 
-        return redirect()->route('projects.index')->with('success', 'Проект успешно обновлён');
+        return redirect()->route('projects.show', $project->id)->with('success', 'Проект успешно обновлён');
     }
 
     public function destroy(Project $project)
