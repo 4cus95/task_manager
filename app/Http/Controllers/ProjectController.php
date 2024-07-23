@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
@@ -10,6 +11,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Auth::user()->projects;
+
         return view('projects.index', compact('projects'));
     }
 
@@ -37,6 +39,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $this->authorize('update', $project);
+
         return view('projects.edit', compact('project'));
     }
 
