@@ -6,7 +6,7 @@ namespace App\Services\Helpers;
 
 class TimeHelper
 {
-    public static function secondsToFormatTime(int $seconds):string
+    public function secondsToFormatTime(int $seconds):string
     {
         $hours = floor($seconds / 3600);
         $minutes = floor(($seconds % 3600) / 60);
