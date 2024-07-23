@@ -63,7 +63,9 @@ class ProjectPolicy
         return $this->hasAccess($user, $project);
     }
 
-    //Вынес в общий метод проверки
+    /*
+     * Вынес в общий метод проверки
+     * */
     private function hasAccess(User $user, Project $project):bool {
         return $user->id === $project->user_id;
     }
