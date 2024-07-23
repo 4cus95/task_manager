@@ -10,7 +10,11 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'user_id'];
+    protected $fillable = [
+        'name',
+        'description',
+        'user_id'
+    ];
 
     public function tasks()
     {
@@ -22,7 +26,7 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getTotalTime()
+    public function getTotalTimeAttribute()
     {
         $totalTime = $this->tasks->sum(function ($task) {
             return $task->seconds_spent;
@@ -30,5 +34,4 @@ class Project extends Model
 
         return TimeHelper::secondsToFormatTime($totalTime);
     }
-
 }

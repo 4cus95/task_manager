@@ -5,7 +5,7 @@
         <h1>Проект <b>{{ $project->name }}</b></h1>
         <p>{{ $project->description }}</p>
 
-        <p>Общее время проекта: {{$project->getTotalTime()}}</p>
+        <p>Общее время проекта: {{$project->totalTime}}</p>
     </div>
 
     <div class="container">
