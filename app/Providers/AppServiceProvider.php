@@ -16,10 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(TimeHelper::class, function (Application $app) {
-            return new TimeHelper();
-        });
-
         $this->app->singleton(TimerService::class, function (Application $app) {
             $request = $app->make(Request::class);
             return new TimerService($request->task);

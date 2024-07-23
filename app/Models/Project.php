@@ -32,8 +32,6 @@ class Project extends Model
             return $task->seconds_spent;
         }) ?: 0;
 
-        $timeHelper = app()->make(TimeHelper::class);
-
-        return $timeHelper->secondsToFormatTime($totalTime);
+        return TimeHelper::secondsToFormatTime($totalTime);
     }
 }

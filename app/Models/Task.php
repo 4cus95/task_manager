@@ -25,9 +25,7 @@ class Task extends Model
 
     public function getTotalTimeAttribute()
     {
-        $timeHelper = app()->make(TimeHelper::class);
-
-        return $timeHelper->secondsToFormatTime($this->seconds_spent ?: 0);
+        return TimeHelper::secondsToFormatTime($this->seconds_spent ?: 0);
     }
 
     public function addSeconds(int $seconds = 0)
