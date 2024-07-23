@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class TimerService
 {
-    public function __construct($task)
+    public function __construct(Task $task)
     {
         $this->task = $task;
     }
