@@ -28,7 +28,7 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
-    public function show(Project $project, TimerService $timerService)
+    public function show(Project $project)
     {
         $this->authorize('view', $project);
 
