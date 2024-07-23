@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Services\TimerService;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -27,7 +28,7 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
-    public function show(Project $project)
+    public function show(Project $project, TimerService $timerService)
     {
         $this->authorize('view', $project);
 

@@ -10,8 +10,9 @@ use Carbon\Carbon;
 
 class TimerService
 {
-    public function __construct(Task $task)
-    {
+    private $task = false;
+
+    public function setTask(Task $task) {
         $this->task = $task;
     }
 
@@ -37,14 +38,12 @@ class TimerService
     {
         $this->stopTracking();
 
-        if(!$this->task instanceof Task) {
-            return;
+        if($this->task instanceof Task) {
+            Timer::query()->create([
+                'user_id' => Auth::id(),
+                'task_id' => $this->task->id,
+                'started_at' => new Carbon()
+            ]);
         }
-
-        Timer::query()->create([
-            'user_id' => Auth::id(),
-            'task_id' => $this->task->id,
-            'started_at' => new Carbon()
-        ]);
     }
 }
