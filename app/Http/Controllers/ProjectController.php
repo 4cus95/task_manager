@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $this->authorize('update', $project);
         $project->update($request->all());
 
-        return redirect()->route('projects.show', $project->id)->with('success', 'Проект успешно обновлён');
+        return redirect()->route('projects.show', $project->id)->with('success', __('messages.project_updated'));
     }
 
     public function destroy(Project $project)
@@ -56,6 +56,6 @@ class ProjectController extends Controller
         $this->authorize('delete', $project);
         $project->delete();
 
-        return redirect()->route('projects.index')->with('success', 'Задача удалена.');
+        return redirect()->route('projects.index')->with('success', __('messages.task_deleted'));
     }
 }

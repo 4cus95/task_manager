@@ -17,7 +17,7 @@ class TaskController extends Controller
     public function store(TaskRequest $request, Project $project)
     {
         Task::create($request->all());
-        return redirect()->route('projects.show', ['project' => $project->id])->with('success', 'Задача создана');
+        return redirect()->route('projects.show', ['project' => $project->id])->with('success', __('messages.task_created'));
     }
 
     public function show(Project $project, Task $task)
@@ -41,7 +41,7 @@ class TaskController extends Controller
         $this->authorize('update', $project);
         $task->update($request->all());
 
-        return redirect()->route('projects.show', $project->id)->with('success', 'Задача обновлена');
+        return redirect()->route('projects.show', $project->id)->with('success',  __('messages.task_updated'));
     }
 
     public function destroy(Project $project, Task $task)
@@ -49,6 +49,6 @@ class TaskController extends Controller
         $this->authorize('delete', $project);
 
         $task->delete();
-        return redirect()->route('projects.show', $project->id)->with('success', 'Задача удалена.');
+        return redirect()->route('projects.show', $project->id)->with('success', __('messages.task_deleted'));
     }
 }
