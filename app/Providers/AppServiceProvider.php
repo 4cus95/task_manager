@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Helpers\TimeHelper;
 use Illuminate\Contracts\Foundation\Application;
+use App\Services\TimerService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(TimeHelper::class, function (Application $app) {
             return new TimeHelper();
+        });
+
+        $this->app->singleton(TimerService::class, function (Application $app) {
+            $request = $app->make(Request::class);
+            return new TimerService($request->task);
         });
     }
 
