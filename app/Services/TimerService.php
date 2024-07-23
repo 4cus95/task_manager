@@ -37,6 +37,10 @@ class TimerService
     {
         $this->stopTracking();
 
+        if(!$this->task instanceof Task) {
+            return;
+        }
+
         Timer::query()->create([
             'user_id' => Auth::id(),
             'task_id' => $this->task->id,
