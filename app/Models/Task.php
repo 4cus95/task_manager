@@ -23,7 +23,7 @@ class Task extends Model
         return $this->hasMany(Timer::class);
     }
 
-    public function getTotalTime()
+    public function getTotalTimeAttribute()
     {
         return TimeHelper::secondsToFormatTime($this->seconds_spent ?: 0);
     }

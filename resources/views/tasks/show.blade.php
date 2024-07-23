@@ -37,7 +37,7 @@
         @if ($task->timers->isEmpty())
             <p>Отметок времени нет.</p>
         @else
-            <p>Общее время задачи: {{$task->getTotalTime()}}</p>
+            <p>Общее время задачи: {{$task->totalTime}}</p>
 
             <table class="table table-bordered">
                 <thead>

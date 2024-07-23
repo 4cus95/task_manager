@@ -14,7 +14,7 @@ class TimerService
     public static function stopTracking()
     {
         $timer = Timer::getUserStarted()->first();
-        if (!$timer) {
+        if ( !$timer ) {
             return;
         }
 
