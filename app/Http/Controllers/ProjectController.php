@@ -32,8 +32,6 @@ class ProjectController extends Controller
     {
         $this->authorize('view', $project);
 
-        $tasks = $project->tasks;
-
         return view('projects.show', compact('project'));
     }
 
