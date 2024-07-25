@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'redirect_home' => \App\Http\Middleware\RedirectOnProjects::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

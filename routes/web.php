@@ -8,7 +8,7 @@ use App\Http\Controllers\TimerController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('redirect_home');
 
 Auth::routes();
 

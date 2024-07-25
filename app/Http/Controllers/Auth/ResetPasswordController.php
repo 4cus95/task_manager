@@ -25,5 +25,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/projects';
+    public function redirectTo() {
+        return route('projects.index');
+    }
 }

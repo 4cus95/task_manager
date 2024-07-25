@@ -25,7 +25,9 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/projects';
+    public function redirectTo() {
+        return route('projects.index');
+    }
 
     /**
      * Create a new controller instance.
