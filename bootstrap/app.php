@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'redirect_home' => \App\Http\Middleware\RedirectOnProjects::class
+            'redirect_on_projects_if_auth' => \App\Http\Middleware\RedirectOnProjects::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
