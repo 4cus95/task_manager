@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\RedirectAuthTrait;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -19,13 +20,5 @@ class ResetPasswordController extends Controller
     */
 
     use ResetsPasswords;
-
-    /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    public function redirectTo() {
-        return route('projects.index');
-    }
+    use RedirectAuthTrait;
 }

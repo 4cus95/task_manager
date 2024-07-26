@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\RedirectAuthTrait;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
 class ConfirmPasswordController extends Controller
@@ -19,15 +20,7 @@ class ConfirmPasswordController extends Controller
     */
 
     use ConfirmsPasswords;
-
-    /**
-     * Where to redirect users when the intended url fails.
-     *
-     * @var string
-     */
-    public function redirectTo() {
-        return route('projects.index');
-    }
+    use RedirectAuthTrait;
 
     /**
      * Create a new controller instance.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\RedirectAuthTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -19,15 +20,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    public function redirectTo() {
-        return route('projects.index');
-    }
+    use RedirectAuthTrait;
 
     /**
      * Create a new controller instance.

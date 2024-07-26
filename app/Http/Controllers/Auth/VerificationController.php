@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\RedirectAuthTrait;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class VerificationController extends Controller
@@ -19,15 +20,7 @@ class VerificationController extends Controller
     */
 
     use VerifiesEmails;
-
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    public function redirectTo() {
-        return route('projects.index');
-    }
+    use RedirectAuthTrait;
 
     /**
      * Create a new controller instance.
