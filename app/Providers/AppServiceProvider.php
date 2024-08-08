@@ -19,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(TimerService::class, function (Application $app) {
             $request = $app->make(Request::class);
             $timerService = new TimerService();
-            $timerService->setTask($request->task);
+            if($request->task) {
+                $timerService->setTask($request->task);
+            }
             return $timerService;
         });
     }
