@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Services\Helpers\TimeHelper;
+use App\Helpers\TimeHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class Task extends Model
 {
