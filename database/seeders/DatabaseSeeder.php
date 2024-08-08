@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->calculateTasksTime();
     }
 
-    private function insertTasks($projects) {
+    private function insertTasks($projects)
+    {
         $projects->each(function ($project) {
             $count = rand(1, 3);
 
@@ -44,7 +45,8 @@ class DatabaseSeeder extends Seeder
         });
     }
 
-    private function insertTime($tasks) {
+    private function insertTime($tasks)
+    {
         $tasks->each(function ($task) {
             $count = rand(1, 8);
             $user = $task->project->user;
@@ -59,7 +61,8 @@ class DatabaseSeeder extends Seeder
     /*
      * Считаем время в задачах по таймерам
      * */
-    private function calculateTasksTime() {
+    private function calculateTasksTime()
+    {
         $tasks = Task::all();
         foreach ($tasks as $task) {
             $seconds_wasted = 0;
