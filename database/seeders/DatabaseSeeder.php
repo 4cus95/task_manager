@@ -26,26 +26,34 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $user->id
             ]);
 
-            $projects->each(function ($project) {
-                $count = rand(1, 3);
-
-                $tasks = Task::factory($count)->create([
-                    'project_id' => $project->id
-                ]);
-
-                $tasks->each(function ($task) {
-                    $count = rand(1, 8);
-                    $user = $task->project->user;
-
-                    Timer::factory($count)->create([
-                        'user_id' => $user->id,
-                        'task_id' => $task->id,
-                    ]);
-                });
-            });
+            $this->insertTasks($projects);
         });
 
         $this->calculateTasksTime();
+    }
+
+    private function insertTasks($projects) {
+        $projects->each(function ($project) {
+            $count = rand(1, 3);
+
+            $tasks = Task::factory($count)->create([
+                'project_id' => $project->id
+            ]);
+
+            $this->insertTime($tasks);
+        });
+    }
+
+    private function insertTime($tasks) {
+        $tasks->each(function ($task) {
+            $count = rand(1, 8);
+            $user = $task->project->user;
+
+            Timer::factory($count)->create([
+                'user_id' => $user->id,
+                'task_id' => $task->id,
+            ]);
+        });
     }
 
     /*
