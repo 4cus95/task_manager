@@ -44,11 +44,9 @@ class DatabaseSeeder extends Seeder
     {
         $tasks->each(function ($task) {
             $count = rand(self::MIN_COUNT, self::MAX_COUNT);
-
             $timers = Timer::factory($count)->make([
                 'user_id' => $task->project->user,
             ]);
-
             $task->timers()->saveMany($timers);
         });
     }
