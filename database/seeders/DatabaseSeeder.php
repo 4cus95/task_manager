@@ -11,17 +11,17 @@ use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
+    private const MIN_COUNT = 1;
+    private const MAX_COUNT = 3;
+
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        $users = User::factory(3)->create();
+        $users = User::factory(self::MAX_COUNT)->create();
         $users->each(function ($user) {
-            $count = rand(1, 3);
+            $count = rand(self::MIN_COUNT, self::MAX_COUNT);
 
-            $projects = Project::factory($count)->create([
-                'user_id' => $user->id
-            ]);
+            $projects = Project::factory($count)->make();
+            $user->projects()->saveMany($projects);
 
             $this->insertTasks($projects);
         });
@@ -32,26 +32,24 @@ class DatabaseSeeder extends Seeder
     private function insertTasks($projects)
     {
         $projects->each(function ($project) {
-            $count = rand(1, 3);
+            $count = rand(self::MIN_COUNT, self::MAX_COUNT);
+            $tasks = Task::factory($count)->make();
+            $project->tasks()->saveMany($tasks);
 
-            $tasks = Task::factory($count)->create([
-                'project_id' => $project->id
-            ]);
-
-            $this->insertTime($tasks);
+            $this->insertTimers($tasks);
         });
     }
 
-    private function insertTime($tasks)
+    private function insertTimers($tasks)
     {
         $tasks->each(function ($task) {
-            $count = rand(1, 8);
-            $user = $task->project->user;
+            $count = rand(self::MIN_COUNT, self::MAX_COUNT);
 
-            Timer::factory($count)->create([
-                'user_id' => $user->id,
-                'task_id' => $task->id,
+            $timers = Timer::factory($count)->make([
+                'user_id' => $task->project->user,
             ]);
+
+            $task->timers()->saveMany($timers);
         });
     }
 
