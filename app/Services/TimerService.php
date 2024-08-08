@@ -10,12 +10,6 @@ use Carbon\Carbon;
 
 class TimerService
 {
-    protected $task;
-
-    public function setTask(Task $task) {
-        $this->task = $task;
-    }
-
     public function createTimersForTasks($tasks): void
     {
         $tasks->each(function ($task) {
@@ -45,13 +39,13 @@ class TimerService
         $timer->task->addSeconds((int)$diff->totalSeconds ?: 0);
     }
 
-    public function trackTime()
+    public function trackTime(Task $task)
     {
         $this->stopTracking();
 
         Timer::query()->create([
             'user_id' => Auth::id(),
-            'task_id' => $this->task->id,
+            'task_id' => $task->id,
             'started_at' => new Carbon()
         ]);
     }

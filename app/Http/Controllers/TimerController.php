@@ -12,7 +12,7 @@ class TimerController extends Controller
     {
         $this->authorize('update', $project);
 
-        $timerService->trackTime();
+        $timerService->trackTime($task);
 
         return redirect()->route('projects.tasks.show', [$project->id, $task->id]);
     }
