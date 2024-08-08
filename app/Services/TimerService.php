@@ -28,9 +28,12 @@ class TimerService
             return;
         }
 
-        /** @var $timer Timer */
+        $this->stopTimer($timer);
+    }
+
+    public function stopTimer(Timer $timer) {
         $timer->update([
-            'ended_at' => new Carbon()
+            'ended_at' => now()
         ]);
         $timer->refresh();
 
@@ -46,18 +49,25 @@ class TimerService
         Timer::query()->create([
             'user_id' => Auth::id(),
             'task_id' => $task->id,
-            'started_at' => new Carbon()
+            'started_at' => now()
         ]);
+    }
+
+    private function updateTaskSecondsSpent(Task $task): void
+    {
+        $secondsWasted = $task->timers->sum(function ($timer) {
+            return $timer->started_at->diffInSeconds($timer->ended_at);
+        });
+
+        $task->update(['seconds_spent' => $secondsWasted]);
     }
 
     public function calculateTasksTime(): void
     {
-        Task::all()->each(function ($task) {
-            $secondsWasted = $task->timers->sum(function ($timer) {
-                return $timer->started_at->diffInSeconds($timer->ended_at);
-            });
-
-            $task->update(['seconds_spent' => $secondsWasted]);
+        Task::with('timers')->chunkById(100, function ($tasks) {
+            foreach ($tasks as $task) {
+                $this->updateTaskSecondsSpent($task);
+            }
         });
     }
 }
